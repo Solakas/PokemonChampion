@@ -99,6 +99,15 @@ const competitiveDatabase = {
         format: "singles",
         members: ["suicune", "blissey", "gliscor"],
         desc: "Suicune (Pressure/RestTalk) εξαντλεί τα PP του αντιπάλου, η Blissey απορροφά κάθε Special κίνηση με Natural Cure, και ο Gliscor με Poison Heal είναι άτρωτος σε status και physical Ground επιθέσεις."
+      },
+      {
+        id: "bdsp_s_voltturn",
+        title: "VoltTurn Pivot Machine",
+        tag: "Momentum Control",
+        game: "bdsp",
+        format: "singles",
+        members: ["rotom_wash", "scizor", "garchomp"],
+        desc: "Το κορυφαίο VoltTurn Core του Battle Tower. Rotom-W με Levitate και Scizor με U-turn διατηρούν αδιάκοπο momentum, ακυρώνουν Ground & Fire απειλές με τέλεια αλληλοκάλυψη, ενώ ο Garchomp εκτελεί τον αντίπαλο."
       }
     ],
 
@@ -1171,29 +1180,50 @@ const competitiveDatabase = {
       species: "Plasma Pokémon",
       gender: "—",
       types: ["ELECTRIC", "WATER"],
-      nature: "Modest (+Sp. Atk, -Attack)",
+      nature: "Bold (+Defense, -Attack)",
       ability: "Levitate",
-      abilityDesc: "Ασυλία σε Ground κινήσεις (αφαιρεί τη μοναδική αδυναμία του Electric typing!). Μόνο το Grass του κάνει 2x super-effective.",
-      heldItem: "Sitrus Berry",
-      itemDesc: "Αναπληρώνει άμεσα 25% HP όταν πέσει κάτω από το 50%.",
-      role: "VoltTurn Pivot & Disrupter",
-      strategy: "Απίστευτο typing με μόνο 1 αδυναμία. Volt Switch προσφέρει momentum, Hydro Pump καθαρίζει Ground/Fire και Will-O-Wisp ακρωτηριάζει physical attackers.",
-      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/479-wash.png",
-      icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/479.png",
-      buildAnalysis: "<strong>EV Optimization:</strong> 252 HP / 252 Sp. Atk / 4 Speed. Ανθεκτικό pivot με ισχυρή πίεση.",
+      abilityDesc: "Πλήρης ανοσία σε Ground επιθέσεις (εξαλείφει τη μοναδική αδυναμία του Electric!). Μόνο το Grass του προκαλεί 2x super-effective ζημιά.",
+      heldItem: "Leftovers",
+      itemDesc: "Αναπληρώνει το 1/16 της μέγιστης ζωής του στο τέλος κάθε γύρου, διατηρώντας το defensive bulk του.",
+      role: "Bulky Defensive Pivot & Status Spreader",
+      strategy: "Το απόλυτο defensive pivot. Χάρη στο Levitate έχει μόνο 1 αδυναμία (Grass). Ρίχνει Will-O-Wisp για να ακρωτηριάσει physical attackers (-50% Atk), παίρνει ασφαλές momentum με Volt Switch και καθαρίζει Ground/Fire/Rock απειλές με STAB Hydro Pump.",
+
+      battleGuide: {
+        switchIn: "Μπαίνει άφοβα σε οποιαδήποτε Ground επίθεση (πλήρης ανοσία στο Earthquake λόγω Levitate), καθώς και σε επιθέσεις Νερού, Φωτιάς, Πάγου, Flying και Steel.",
+        winPlan: [
+          "Κάνεις switch-in σε προβλέψιμο Earthquake (απέναντι σε Garchomp, Gliscor, Hippowdon, Landorus) ή Water/Steel χτυπήματα χωρίς καμία ζημιά.",
+          "Πατάς Will-O-Wisp στον πρώτο γύρο: Καίει τον αντίπαλο physical attacker, μειώνοντας άμεσα το Attack του κατά 50% και εξουδετερώνοντας τον κίνδυνο.",
+          "Χρησιμοποιείς Hydro Pump για σκληρό neutral ή super-effective damage απέναντι σε Ground, Rock και Fire απειλές (Heatran, Tyranitar, Hippowdon).",
+          "Πατάς Volt Switch για να προκαλέσεις chip damage και να κάνεις ασφαλές switch-out, φέρνοντας τον sweeper της ομάδας σου χωρίς να δεχθεί χτύπημα."
+        ],
+        threats: "Ισχυρές Grass επιθέσεις (Rillaboom Grassy Glide, Breloom, Roserade), καθώς και Pokémon με Mold Breaker (Excadrill, Haxorus) που αγνοούν το Levitate και χτυπούν με Earthquake."
+      },
+      alternativeMoves: [
+        { name: "Thunderbolt", type: "ELECTRIC", pwr: "90", acc: "100%", priority: "0", effect: "10% Paralysis. Σταθερό και δυνατό Electric STAB όταν θέλετε να χτυπήσετε Water/Flying χωρίς να φύγετε από το γήπεδο.", learn: "TM24 (Battle Park)", method: "TM24", whyChoose: "Αντικαθιστά το Volt Switch όταν χρειάζεστε μέγιστη direct ζημιά χωρίς αναγκαστικό switch-out." },
+        { name: "Pain Split", type: "NORMAL", pwr: "—", acc: "—", priority: "0", effect: "Αθροίζει τα τρέχοντα HP του Rotom και του αντιπάλου και τα μοιράζει ισόποσα. Εξαιρετικό healing.", learn: "Tutor (Survival Area)", method: "Tutor", whyChoose: "Παρέχει αξιόπιστο recovery απέναντι σε bulky Pokémon με τεράστιο HP (Blissey, Snorlax, Vaporeon)." },
+        { name: "Trick", type: "PSYCHIC", pwr: "—", acc: "100%", priority: "0", effect: "Ανταλλάσσει το αντικείμενο με τον αντίπαλο. Ιδανικό με Choice Scarf/Specs για να κλειδώσει αντίπαλα τείχη.", learn: "Tutor (Route 212)", method: "Tutor", whyChoose: "Αχρηστεύει πλήρως defensive walls (Blissey, Clefable, Milotic) κλειδώνοντάς τα σε μία κίνηση." },
+        { name: "Thunder Wave", type: "ELECTRIC", pwr: "—", acc: "90%", priority: "0", effect: "Παραλύει άμεσα τον αντίπαλο. Μειώνει το Speed του κατά 75% και δίνει 25% πιθανότητα πλήρους αδράνειας.", learn: "TM73 (Battle Park)", method: "TM73", whyChoose: "Speed control απέναντι σε ταχύτερους sweepers και Fire Pokémon που έχουν ανοσία στο Will-O-Wisp." },
+        { name: "Nasty Plot", type: "DARK", pwr: "—", acc: "—", priority: "0", effect: "Αυξάνει το Sp. Atk κατά 2 στάδια (+100%). Μετατρέπει το Rotom-W σε επικίνδυνο special sweeper.", learn: "TM / Level-Up", method: "TM", whyChoose: "Offensive setup build για να μετατρέψετε το Rotom από pivot σε wallbreaker." },
+        { name: "Electroweb", type: "ELECTRIC", pwr: "55", acc: "95%", priority: "0", effect: "Χτυπάει και τους δύο αντιπάλους σε Doubles και μειώνει υποχρεωτικά το Speed τους κατά 1 στάδιο.", learn: "Tutor (Survival Area)", method: "Tutor", whyChoose: "Απαραίτητο speed control utility σε Doubles (4v4) τετράδες." },
+        { name: "Shadow Ball", type: "GHOST", pwr: "80", acc: "100%", priority: "0", effect: "20% πιθανότητα μείωσης Sp. Def του αντιπάλου κατά 1. Κάλυψη σε Psychic και Ghost.", learn: "TM30 (Celestic Town)", method: "TM30", whyChoose: "Χτυπάει σκληρά Latios, Dragapult, Gengar και άλλα Ghost/Psychic Pokémon." },
+        { name: "Protect", type: "NORMAL", pwr: "—", acc: "—", priority: "+4", effect: "🛡️ Priority +4. Αποκρούει όλες τις επιθέσεις για 1 γύρο. Δωρεάν Leftovers recovery γύρος.", learn: "TM17 (Veilstone Store)", method: "TM17", whyChoose: "Απαραίτητο scouting και αποφυγή Fake Out σε Doubles/VGC." }
+      ],
+      img: "./assets/rotom_wash.png",
+      icon: "./assets/rotom_wash_icon.png",
+      buildAnalysis: "<strong>EV Optimization:</strong> 252 HP / 212 Defense / 44 Speed. 157 HP και 169 Def με Bold nature για μέγιστη αντοχή σε Outrage/Close Combat, και 112 Speed για να ξεπερνά τα base 70 Pokémon (Breloom, Bisharp, Metagross).",
       evStats: [
         { name: "HP", ev: 252, stat: 157, boost: "" },
         { name: "Attack", ev: 0, stat: 76, boost: "drop" },
-        { name: "Defense", ev: 0, stat: 127, boost: "" },
-        { name: "Sp. Atk", ev: 252, stat: 172, boost: "boost" },
+        { name: "Defense", ev: 212, stat: 169, boost: "boost" },
+        { name: "Sp. Atk", ev: 0, stat: 125, boost: "" },
         { name: "Sp. Def", ev: 0, stat: 127, boost: "" },
-        { name: "Speed", ev: 4, stat: 107, boost: "" }
+        { name: "Speed", ev: 44, stat: 112, boost: "" }
       ],
       moves: [
-        { name: "Hydro Pump", type: "WATER", pwr: "110", acc: "80%", priority: "0", effect: "Water STAB. Υψηλή ζημιά σε Fire, Rock και Ground απειλές.", learn: "Forme Change", method: "Special" },
-        { name: "Volt Switch", type: "ELECTRIC", pwr: "70", acc: "100%", priority: "0", effect: "Επιτίθεται και κάνει switch-out, κρατώντας ασφαλές momentum.", learn: "TM89", method: "TM89" },
-        { name: "Will-O-Wisp", type: "FIRE", pwr: "—", acc: "85%", priority: "0", effect: "Καίει τον αντίπαλο (Burn), μειώνοντας το Attack του κατά 50%.", learn: "TM61", method: "TM61" },
-        { name: "Protect", type: "NORMAL", pwr: "—", acc: "—", priority: "+4", effect: "🛡️ Priority +4. Απαραίτητο για scouting.", learn: "TM17", method: "TM17" }
+        { name: "Hydro Pump", type: "WATER", pwr: "110", acc: "80%", priority: "0", effect: "Κύριο Water STAB. Τεράστια ζημιά σε Ground, Fire και Rock απειλές (OHKO σε Heatran, Gliscor, Hippowdon).", learn: "Forme Change", method: "Special" },
+        { name: "Volt Switch", type: "ELECTRIC", pwr: "70", acc: "100%", priority: "0", effect: "Επιτίθεται και κάνει αυτόματα switch-out. Εξασφαλίζει ασφαλές momentum και φέρνει τον κατάλληλο counter.", learn: "TM89 (Canalave City)", method: "TM89" },
+        { name: "Will-O-Wisp", type: "FIRE", pwr: "—", acc: "85%", priority: "0", effect: "Καίει τον αντίπαλο (Burn), μειώνοντας το Attack του κατά 50% και προκαλώντας 1/16 chip damage κάθε γύρο.", learn: "TM61 (Lost Tower)", method: "TM61" },
+        { name: "Pain Split", type: "NORMAL", pwr: "—", acc: "—", priority: "0", effect: "Αθροίζει τη ζωή των δύο Pokémon και τη μοιράζει ισόποσα. Αναπληρώνει μαζικά HP απέναντι σε high-HP tanks.", learn: "Tutor (Survival Area)", method: "Tutor" }
       ]
     },
 
